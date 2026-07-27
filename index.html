@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>디스커버 대전 - 대전광역시 종합 관광안내 포털</title>
+  <meta name="description" content="대한민국 과학, 자연, 미식의 수도 대전광역시 종합 관광안내 포털. 성심당 빵지순례, 엑스포과학공원, 유성온천, 장태산 자연휴양림, AI 여행 일정 플래너." />
+  <meta name="keywords" content="대전여행, 대전관광, 성심당, 엑스포과학공원, 유성온천, 장태산, KAIST, 대전가볼만한곳" />
+  
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="header-bar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <div class="logo-icon"><i class="fas fa-atom"></i></div>
+        <span>디스커버 <strong>대전</strong></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#attractions-section" data-i18n="navAttractions">관광명소</a></li>
+          <li><a href="#gourmet-section" data-i18n="navBakeryFood">성심당 & 맛집</a></li>
+          <li><a href="#planner-section" data-i18n="navItinerary">AI 일정 플래너</a></li>
+          <li><a href="#festivals-section" data-i18n="navEvents">축제 & 행사</a></li>
+          <li><a href="#transport-section" data-i18n="navTransport">교통 & 필수정보</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-controls">
+        <select id="lang-select" class="lang-select" aria-label="언어 선택">
+          <option value="ko" selected>🇰🇷 한국어</option>
+          <option value="en">🌐 English</option>
+          <option value="ja">🇯🇵 日本語</option>
+          <option value="zh">🇨🇳 中文</option>
+        </select>
+
+        <button id="theme-toggle-btn" class="theme-toggle-btn" title="테마 전환">
+          ☀️ 라이트 모드
+        </button>
+
+        <button onclick="openWishlistModal()" class="wishlist-nav-btn" title="보관함">
+          <i class="fas fa-heart"></i>
+          <span id="wishlist-badge" class="wishlist-count-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-sparkles"></i> 대한민국 과학·자연·미식의 수도 대전
+      </div>
+      
+      <h1 class="hero-title" data-i18n="heroTitle">
+        미래를 경험하고 전통을 맛보는 도시, <span class="gradient-text">대전</span>
+      </h1>
+      
+      <p class="hero-subtitle" data-i18n="heroSubtitle">
+        세계적인 과학공원, 힐링 온천, 메타세쿼이아 숲, 그리고 대한민국 최고의 성심당 빵집을 서울에서 50분 만에 만나보세요.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#planner-section" class="btn-primary" data-i18n="quickPlanBtn">
+          <i class="fas fa-wand-magic-sparkles"></i> 맞춤 여행 일정 만들기
+        </a>
+        <a href="#attractions-section" class="btn-secondary" data-i18n="exploreSpotsBtn">
+          <i class="fas fa-compass"></i> 대표 관광지 둘러보기
+        </a>
+      </div>
+
+      <!-- Quick Stats Counter Grid -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">50분</span>
+          <span class="stat-label">서울 출발 KTX 소요시간</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">1956년</span>
+          <span class="stat-label">성심당 창립 연도</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">50+</span>
+          <span class="stat-label">첨단 연구기관 및 연구소</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">41°C</span>
+          <span class="stat-label">유성 천연 온천수</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attractions Section -->
+  <section id="attractions-section" class="section">
+    <div class="section-header">
+      <span class="section-tag">대전 추천 코스</span>
+      <h2 class="section-title">대전 대표 관광명소</h2>
+      <p class="section-subtitle">과학 랜드마크, 상쾌한 산림욕장, 천연 온천 족욕장, 다채로운 문화공간을 만나보세요.</p>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="filter-bar-container">
+      <div class="search-box-wrapper">
+        <i class="fas fa-search search-icon"></i>
+        <input 
+          type="text" 
+          id="search-input" 
+          class="search-input" 
+          placeholder="관광지, 성심당, 온천, KAIST 검색..." 
+          oninput="handleSearchInput(this.value)"
+        />
+      </div>
+
+      <div class="category-pills">
+        <button class="category-btn active" onclick="filterCategory('all', this)">
+          <i class="fas fa-grid-2"></i> 전체 카테고리
+        </button>
+        <button class="category-btn" onclick="filterCategory('science', this)">
+          <i class="fas fa-atom"></i> 과학 & 첨단기술
+        </button>
+        <button class="category-btn" onclick="filterCategory('nature', this)">
+          <i class="fas fa-tree"></i> 자연 & 힐링온천
+        </button>
+        <button class="category-btn" onclick="filterCategory('gourmet', this)">
+          <i class="fas fa-utensils"></i> 미식 & 성심당
+        </button>
+        <button class="category-btn" onclick="filterCategory('culture', this)">
+          <i class="fas fa-landmark"></i> 문화 & 역사
+        </button>
+        <button class="category-btn" onclick="filterCategory('shopping', this)">
+          <i class="fas fa-bag-shopping"></i> 쇼핑 & 야경
+        </button>
+      </div>
+    </div>
+
+    <!-- Dynamic Attractions Cards Grid -->
+    <div id="attractions-grid" class="cards-grid"></div>
+  </section>
+
+  <!-- Sung Sim Dang & Foodie Pilgrimage Section -->
+  <section id="gourmet-section" class="section gourmet-section">
+    <div class="section-header">
+      <span class="section-tag" style="color:var(--accent-orange);">미식의 수도</span>
+      <h2 class="section-title">성심당 빵지순례 & 대전 맛집 가이드</h2>
+      <p class="section-subtitle">대한민국 대표 '빵과 면의 도시' 대전을 제대로 즐기는 미식 여행.</p>
+    </div>
+
+    <!-- Sung Sim Dang Banner & Signature Breads -->
+    <div class="sungsim-banner">
+      <div class="sungsim-banner-content">
+        <h3>🥐 성심당 (聖心堂) 빵지순례 가이드</h3>
+        <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.2rem;">
+          1956년 대전역 앞 찐빵집으로 출발해 미슐랭 가이드에 등재된 대전 최고의 대표 빵집! 오직 대전에서만 만날 수 있는 시그니처 빵들을 경험해보세요.
+        </p>
+        <a href="#attractions-section" onclick="filterCategory('gourmet')" class="btn-primary" style="background:linear-gradient(135deg, var(--accent-orange), var(--accent-gold)); font-size:0.95rem;">
+          <i class="fas fa-map-marker-alt"></i> 성심당 매장 위치 찾기
+        </a>
+      </div>
+
+      <div style="background:var(--bg-card); border-radius:var(--radius-md); padding:1.2rem; border:1px solid var(--border-glass);">
+        <h4 style="font-size:1.05rem; font-weight:700; margin-bottom:0.8rem; color:var(--accent-gold);">💡 성심당 방문 핵심 꿀팁</h4>
+        <ul style="color:var(--text-muted); font-size:0.88rem; display:flex; flex-direction:column; gap:0.5rem; padding-left:1.2rem;">
+          <li>가장 다양한 빵과 케익부티크를 보려면 <strong>은행동 본점</strong>을 방문하세요.</li>
+          <li>귀가 전 대전역 2층 <strong>대전역점</strong>에서 튀김소보로 선물상자를 손쉽게 구매할 수 있습니다.</li>
+          <li>시즌 한정 <strong>망고시루 / 생귤시루 케이크</strong>는 케익부티크 매장에서 만날 수 있습니다.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.5rem; font-weight:800; margin-bottom:1.5rem;">⭐ 성심당 대표 시그니처 빵</h3>
+    <div id="sungsim-signature-grid" class="sungsim-bread-grid"></div>
+
+    <h3 style="font-size:1.5rem; font-weight:800; margin-top:4rem; margin-bottom:1.5rem;">🍜 대전 대표 5대 미식 요리</h3>
+    <div id="must-eat-grid" class="cards-grid"></div>
+  </section>
+
+  <!-- AI Travel Itinerary Planner Section -->
+  <section id="planner-section" class="section">
+    <div class="section-header">
+      <span class="section-tag" style="color:var(--accent-rose);">스마트 코스 추천</span>
+      <h2 class="section-title">AI 맞춤 여행 일정 플래너</h2>
+      <p class="section-subtitle">여행 일정, 스타일, 동선에 딱 맞는 대전 여행 타임라인을 생성해 드립니다.</p>
+    </div>
+
+    <div class="planner-box">
+      <div class="planner-controls">
+        <div class="control-group">
+          <label for="plan-duration">⏳ 여행 기간</label>
+          <select id="plan-duration" class="control-select" onchange="generateCustomItinerary()">
+            <option value="1">1일 코스 (당일치기 알짜배기)</option>
+            <option value="2">2일 코스 (1박 2일 힐링&미식)</option>
+            <option value="3">3일 코스 (2박 3일 대전 완전정복)</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="plan-style">🎯 주요 관심사 & 테마</label>
+          <select id="plan-style" class="control-select" onchange="generateCustomItinerary()">
+            <option value="balanced">균형잡힌 추천 코스</option>
+            <option value="science">과학 & 첨단기술 탐방</option>
+            <option value="nature">자연 힐링 & 온천 스파</option>
+            <option value="gourmet">성심당 & 대전 빵지순례</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="plan-pace">⚡ 여행 페이스</label>
+          <select id="plan-pace" class="control-select" onchange="generateCustomItinerary()">
+            <option value="comfortable">여유로운 힐링 페이스</option>
+            <option value="active">알차고 활발한 페이스</option>
+          </select>
+        </div>
+
+        <button onclick="generateCustomItinerary()" class="btn-generate-planner">
+          <i class="fas fa-wand-magic-sparkles"></i> AI 일정 생성하기
+        </button>
+      </div>
+
+      <!-- Generated Timeline Display -->
+      <div id="itinerary-result-display"></div>
+    </div>
+  </section>
+
+  <!-- Travel Utilities (FX Currency & Weather) -->
+  <section class="section">
+    <div class="utilities-grid">
+      
+      <!-- Currency Converter -->
+      <div class="utility-card">
+        <h3 style="font-size:1.4rem; font-weight:800; margin-bottom:0.5rem;"><i class="fas fa-calculator" style="color:var(--accent-cyan);"></i> 실시간 환율 계산기</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;">원화(KRW) 금액을 원하는 국가의 통화로 환산해 보세요.</p>
+        
+        <div class="fx-input-row">
+          <input type="number" id="fx-krw-input" class="fx-input" value="10000" step="1000" />
+          <span style="font-weight:700; font-size:1.1rem;">원 (KRW ₩)</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem; font-size:1rem; font-weight:700;">
+          <div style="background:rgba(255,255,255,0.05); padding:0.8rem; border-radius:var(--radius-sm);" id="fx-res-usd">$0.00 USD</div>
+          <div style="background:rgba(255,255,255,0.05); padding:0.8rem; border-radius:var(--radius-sm);" id="fx-res-eur">€0.00 EUR</div>
+          <div style="background:rgba(255,255,255,0.05); padding:0.8rem; border-radius:var(--radius-sm);" id="fx-res-jpy">¥0 JPY</div>
+          <div style="background:rgba(255,255,255,0.05); padding:0.8rem; border-radius:var(--radius-sm);" id="fx-res-cny">¥0.00 CNY</div>
+        </div>
+      </div>
+
+      <!-- Live Weather Simulator -->
+      <div class="utility-card">
+        <h3 style="font-size:1.4rem; font-weight:800; margin-bottom:0.5rem;"><i class="fas fa-cloud-sun" style="color:var(--accent-gold);"></i> 대전 실시간 날씨</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;">현재 대전광역시의 기상 정보입니다.</p>
+
+        <div class="weather-display-row">
+          <i class="fas fa-sun" style="font-size:3.5rem; color:var(--accent-gold);"></i>
+          <div>
+            <div id="weather-temp" class="weather-temp">24°C</div>
+            <div style="color:var(--text-muted); font-size:0.95rem;">맑음 | 습도 45%</div>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; margin-top:1.5rem; border-top:1px solid var(--border-glass); padding-top:1rem; font-size:0.85rem; color:var(--text-muted);">
+          <div><strong>내일:</strong> 26°C / 맑음</div>
+          <div><strong>모레:</strong> 25°C / 구름조금</div>
+          <div><strong>글피:</strong> 23°C / 바람선선</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Events & Festivals Section -->
+  <section id="festivals-section" class="section">
+    <div class="section-header">
+      <span class="section-tag" style="color:var(--accent-gold);">축제 및 연중행사</span>
+      <h2 class="section-title">대전 대표 연중 축제</h2>
+      <p class="section-subtitle">여름 0시 축제, 국제 와인 엑스포, 사이언스 페스티벌 등 다채로운 행사를 만나보세요.</p>
+    </div>
+
+    <div id="festivals-grid" class="cards-grid"></div>
+  </section>
+
+  <!-- Travel Essentials & Transit Guide -->
+  <section id="transport-section" class="section" style="background:var(--bg-card); border-radius:var(--radius-lg); border:1px solid var(--border-glass); padding:3rem;">
+    <div class="section-header">
+      <span class="section-tag">교통 & 필수정보</span>
+      <h2 class="section-title">대전 오시는 길 & 시내 대중교통</h2>
+      <p class="section-subtitle">고속열차 KTX/SRT, 지하철 1호선, 대전시 공공자전거 타슈 이용 안내.</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem;">
+      <div>
+        <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:1rem; color:var(--accent-cyan);">🚅 서울 및 공항에서 오시는 길</h3>
+        <div id="transport-from-seoul-list" style="display:flex; flex-direction:column; gap:1rem;"></div>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:1rem; color:var(--accent-cyan);">🚲 대전 시내 교통 및 공공자전거</h3>
+        <div style="background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:var(--radius-md); padding:1.2rem; display:flex; flex-direction:column; gap:1rem; font-size:0.92rem;">
+          <div>
+            <strong>🚇 대전 도시철도 1호선:</strong>
+            <p style="color:var(--text-muted);">대전역 ↔ 중앙로(은행동) ↔ 정부청사 ↔ 유성온천역을 일직선으로 연계하는 대전 핵심 지하철.</p>
+          </div>
+          <div>
+            <strong>🚴 타슈(Tashu) 공공자전거:</strong>
+            <p style="color:var(--text-muted);">대전시 어디서나 타슈 앱 설치 후 최초 60분 무료 이용 가능.</p>
+          </div>
+          <div>
+            <strong>📞 24시간 도우미 및 긴급 연락처:</strong>
+            <p style="color:var(--text-muted);">한국관광 종합안내 <strong>1330</strong> (다국어 지원) | 경찰 <strong>112</strong> | 응급구조 <strong>119</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Popup Box -->
+  <div id="spot-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+      <div id="modal-card-body" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div>
+        <a href="#" class="brand-logo" style="margin-bottom:1rem; display:inline-flex;">
+          <div class="logo-icon"><i class="fas fa-atom"></i></div>
+          <span>디스커버 <strong>대전</strong></span>
+        </a>
+        <p style="color:var(--text-muted); font-size:0.9rem; max-width:400px;">
+          대전광역시를 방문하는 국내외 관광객을 위한 종합 관광안내 포털 사이트입니다. 과학, 온천 힐링, 빵지순례, 편리한 교통 정보를 제공합니다.
+        </p>
+      </div>
+
+      <div>
+        <h4 style="color:#fff; margin-bottom:1rem; font-size:1rem;">빠른 메뉴 바로가기</h4>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.5rem;">
+          <li><a href="#attractions-section" style="color:var(--text-muted); text-decoration:none;">과학 명소</a></li>
+          <li><a href="#gourmet-section" style="color:var(--text-muted); text-decoration:none;">성심당 빵지순례</a></li>
+          <li><a href="#planner-section" style="color:var(--text-muted); text-decoration:none;">AI 일정 플래너</a></li>
+          <li><a href="#transport-section" style="color:var(--text-muted); text-decoration:none;">KTX/교통 안내</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color:#fff; margin-bottom:1rem; font-size:1rem;">긴급 연락처</h4>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.5rem; font-size:0.9rem;">
+          <li> 관광안내전화: <strong style="color:var(--accent-cyan);">1330</strong></li>
+          <li> 경찰신고: <strong style="color:var(--accent-cyan);">112</strong></li>
+          <li> 응급 구조: <strong style="color:var(--accent-cyan);">119</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; 2026 디스커버 대전 종합관광안내 포털. All Rights Reserved.
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
